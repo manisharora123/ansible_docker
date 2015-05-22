@@ -1,0 +1,26 @@
+---
+# file roles/nginx/tasks/main.yml
+
+
+
+
+- name: make sure dir exist
+  file: path="{{build_dir}}" state="directory"
+
+
+- name: push dockerfile on node
+  template: src="dockerfile.j2" dest="{{build_dir}}/Dockerfile"
+
+- name: build dockerfile
+  shell: docker build -t {{image_name}}  {{build_dir}}
+  sudo: yes
+
+
+- name: Run docker nginx image
+  docker:
+    name: manish_nginx_cimg
+    image: "{{image_name}}"
+    state: started
+    ports:
+    - "{{nginx_port}}:80"
+  sudo: yes  

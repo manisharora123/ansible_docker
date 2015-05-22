@@ -1,0 +1,22 @@
+---
+# file site.yml
+
+- hosts: web
+  roles:
+  - common
+ # - docker
+  - nginx
+
+#  pre_tasks:
+ # - debug: msg="Starting  to install docker"
+
+
+  #post_tasks:
+  #- debug: msg="Dcoker finished"
+
+  pre_tasks:
+  - debug: msg="nginx by Mr.Manish Arora"
+
+
+  post_tasks:
+  - debug: msg="Nothing is impossible"
